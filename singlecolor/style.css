@@ -1,0 +1,33 @@
+:root {
+    --coloringColor: #8a2be2;
+}
+html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+.content {
+    display: flex;
+    flex-flow: column;
+}
+.gridRow {
+    display: flex;
+    justify-content: center;
+}
+.gridSquare {
+    border: 1px solid black;
+    /* To prevent double borders (could alternatively use outline
+    instead of border, and 1px margins) */
+    margin-top: -1px;
+    margin-right: -1px;
+}
+.hovered {
+    background-color: var(--coloringColor);
+}
+input {
+    width: 130px;
+}
+h2 {
+    text-align: center;
+}

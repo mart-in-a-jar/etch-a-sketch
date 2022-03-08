@@ -31,17 +31,17 @@ function createGrid(rows, columns) {
     squares.forEach(square => {
         square.addEventListener("mousemove", e => {
             if (e.buttons === 1) {
-                applyColor(e.target);
+                e.target.classList.add("hovered");
                 if (e.ctrlKey) {
-                removeColor(e.target);
+                e.target.classList.remove("hovered");
                 }
             }
         });
         square.addEventListener("click", e => {
             if (e.ctrlKey) {
-                removeColor(e.target);
+                e.target.classList.remove("hovered");
             } else {
-                applyColor(e.target);
+            e.target.classList.add("hovered");
             }
         });
     });
@@ -50,7 +50,7 @@ function createGrid(rows, columns) {
 function clearGrid() {
     const squares = document.querySelectorAll(".gridSquare");
     squares.forEach(square => {
-        removeColor(square);
+        square.classList.remove("hovered");
     });
 }
 
@@ -79,13 +79,13 @@ function makeNewGrid() {
     }
 }
 
-function applyColor(target) {
-    target.style["background-color"] = colorPicker.value;
+function changeColor(color) {
+    root.style.setProperty("--coloringColor", color);
 }
 
-function removeColor(target) {
-    target.style["background-color"] = null;
-}
+colorPicker.addEventListener("change", () => {
+    changeColor(colorPicker.value);
+} )
 
 clearButton.addEventListener("click", () => {
     clearGrid();
@@ -103,7 +103,7 @@ dimensionsField.addEventListener("keyup", e => {
 okButton.addEventListener("click", makeNewGrid);
 
 changePageButton.addEventListener("click", () => {
-    window.location.href = "./singlecolor/index.html"
+    window.location.href = "../index.html"
 });
 
 createGrid(20, 20);
