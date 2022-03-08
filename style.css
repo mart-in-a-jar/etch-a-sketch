@@ -25,3 +25,6 @@ input {
 h2 {
     text-align: center;
 }
+#mode {
+    width: 130px;
+}

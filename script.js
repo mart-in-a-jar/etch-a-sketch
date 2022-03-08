@@ -9,6 +9,9 @@ okButton.textContent = "OK";
 const colorPicker = document.querySelector("#colorPicker");
 const root = document.querySelector(":root");
 const changePageButton = document.querySelector("#changePage");
+const modeButton = document.querySelector("#mode");
+
+let mode = "color";
 
 function createGrid(rows, columns) {
     removeGrid()
@@ -20,8 +23,8 @@ function createGrid(rows, columns) {
         for (let j = 0; j < columns; j++) {
             divSquares.push(document.createElement("div"));
             divSquares[j].classList.add("gridSquare");
-            divSquares[j].style["width"] = `${800 / columns}px`;
-            divSquares[j].style["height"] = `${800 / rows}px`;
+            divSquares[j].style["width"] = `${700 / columns}px`;
+            divSquares[j].style["height"] = `${700 / rows}px`;
             divRows[i].appendChild(divSquares[j]);
         }
         content.appendChild(divRows[i]);
@@ -29,7 +32,7 @@ function createGrid(rows, columns) {
     const squares = document.querySelectorAll(".gridSquare");
 
     squares.forEach(square => {
-        square.addEventListener("mousemove", e => {
+        square.addEventListener("mouseover", e => {
             if (e.buttons === 1) {
                 applyColor(e.target);
                 if (e.ctrlKey) {
@@ -37,7 +40,7 @@ function createGrid(rows, columns) {
                 }
             }
         });
-        square.addEventListener("click", e => {
+        square.addEventListener("mousedown", e => {
             if (e.ctrlKey) {
                 removeColor(e.target);
             } else {
@@ -80,11 +83,30 @@ function makeNewGrid() {
 }
 
 function applyColor(target) {
+    if (mode === "color") {
     target.style["background-color"] = colorPicker.value;
+    } else if (mode === "rainbow") {
+        const randomR = Math.floor(Math.random() * 256);
+        const randomG = Math.floor(Math.random() * 256);
+        const randomB = Math.floor(Math.random() * 256);
+        target.style["background-color"] = `rgb(${randomR}, ${randomG}, ${randomB})`;
+    }
 }
 
 function removeColor(target) {
     target.style["background-color"] = null;
+}
+
+function changeMode() {
+    if (mode === "color") {
+        mode = "rainbow";
+        colorPicker.remove();
+        modeButton.textContent = "Color mode";
+    } else {
+        mode = "color";
+        content.insertBefore(colorPicker, modeButton);
+        modeButton.textContent = "Rainbow mode";
+    }
 }
 
 clearButton.addEventListener("click", () => {
@@ -105,5 +127,7 @@ okButton.addEventListener("click", makeNewGrid);
 changePageButton.addEventListener("click", () => {
     window.location.href = "./singlecolor/index.html"
 });
+
+modeButton.addEventListener("click", changeMode);
 
 createGrid(20, 20);
