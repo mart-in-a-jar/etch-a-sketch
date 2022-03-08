@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +9,16 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
-<body>
-    <div class="content"></div>
+
+<body ondragstart="return false">
+    <div class="content">
+        <div class="reset">
+            <button id="clearGrid">Reset</button>
+            <button id="newGrid">New size</button>
+        </div>
+        <input type="color" id="colorPicker" value="#8a2be2">
+        <h2>Hold down ctrl to erase</h2>
+    </div>
 </body>
+
 </html>
