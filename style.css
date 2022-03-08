@@ -1,0 +1,19 @@
+.content {
+    display: flex;
+    flex-flow: column;
+}
+
+.gridRow {
+    display: flex;
+    justify-content: center;
+}
+
+.gridSquare {
+    border: 1px solid black;
+    width: 40px;
+    height: 40px;
+}
+
+.hovered {
+
+}
