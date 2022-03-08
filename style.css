@@ -1,3 +1,6 @@
+:root {
+    --coloringColor: #8a2be2;
+}
 html {
     box-sizing: border-box;
   }
@@ -20,7 +23,7 @@ html {
     margin-right: -1px;
 }
 .hovered {
-    background-color: blueviolet;
+    background-color: var(--coloringColor);
 }
 input {
     width: 130px;

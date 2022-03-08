@@ -7,6 +7,7 @@ dimensionsField.setAttribute("placeholder", "Number of squares");
 const okButton = document.createElement("button");
 okButton.textContent = "OK";
 const colorPicker = document.querySelector("#colorPicker");
+const root = document.querySelector(":root");
 
 function createGrid(rows, columns) {
     removeGrid()
@@ -76,6 +77,14 @@ function makeNewGrid() {
         resetDiv.appendChild(resetButton);
     }
 }
+
+function changeColor(color) {
+    root.style.setProperty("--coloringColor", color);
+}
+
+colorPicker.addEventListener("change", () => {
+    changeColor(colorPicker.value);
+} )
 
 clearButton.addEventListener("click", () => {
     clearGrid();
