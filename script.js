@@ -30,17 +30,17 @@ function createGrid(rows, columns) {
     squares.forEach(square => {
         square.addEventListener("mousemove", e => {
             if (e.buttons === 1) {
-                e.target.classList.add("hovered");
+                applyColor(e.target);
                 if (e.ctrlKey) {
-                e.target.classList.remove("hovered");
+                removeColor(e.target);
                 }
             }
         });
         square.addEventListener("click", e => {
             if (e.ctrlKey) {
-                e.target.classList.remove("hovered");
+                removeColor(e.target);
             } else {
-            e.target.classList.add("hovered");
+                applyColor(e.target);
             }
         });
     });
@@ -49,7 +49,7 @@ function createGrid(rows, columns) {
 function clearGrid() {
     const squares = document.querySelectorAll(".gridSquare");
     squares.forEach(square => {
-        square.classList.remove("hovered");
+        removeColor(square);
     });
 }
 
@@ -78,13 +78,13 @@ function makeNewGrid() {
     }
 }
 
-function changeColor(color) {
-    root.style.setProperty("--coloringColor", color);
+function applyColor(target) {
+    target.style["background-color"] = colorPicker.value;
 }
 
-colorPicker.addEventListener("change", () => {
-    changeColor(colorPicker.value);
-} )
+function removeColor(target) {
+    target.style["background-color"] = null;
+}
 
 clearButton.addEventListener("click", () => {
     clearGrid();

@@ -1,6 +1,3 @@
-:root {
-    --coloringColor: #8a2be2;
-}
 html {
     box-sizing: border-box;
   }
@@ -21,9 +18,6 @@ html {
     instead of border, and 1px margins) */
     margin-top: -1px;
     margin-right: -1px;
-}
-.hovered {
-    background-color: var(--coloringColor);
 }
 input {
     width: 130px;
