@@ -14,6 +14,8 @@ const modeButtons = document.querySelectorAll("button.mode");
 const gridPicker = document.querySelector("#toggleGrid");
 
 let mode = "color";
+let opacity = 10;
+let showGrid = false;
 
 function createGrid(rows, columns) {
     removeGrid()
@@ -50,6 +52,7 @@ function createGrid(rows, columns) {
             }
         });
     });
+    toggleGrid();
 }
 
 function clearGrid() {
@@ -92,9 +95,18 @@ function applyColor(target) {
         const randomG = Math.floor(Math.random() * 256);
         const randomB = Math.floor(Math.random() * 256);
         target.style["background-color"] = `rgb(${randomR}, ${randomG}, ${randomB})`;
-    } else if (mode === "pencil") {
-        let opacity = "0.9";
-        let color = `rgba(0, 0, 0, ${opacity}`
+    } else if (mode === "gradient") {
+        let color = `${colorPicker.value}${opacity}`
+        target.style["background-color"] = color;
+        console.log(color);
+        if (opacity === "") {
+            opacity = 10;
+        }
+        else if (opacity < 90) {
+            opacity += 10;
+        } else if (opacity === 90) {
+            opacity = "";
+        }
     }
 }
 
@@ -109,25 +121,30 @@ function changeMode(button) {
     if (button.classList.contains("color")) {
         mode = "color";
         button.classList.add("activeMode");
-        optionsDiv.insertBefore(colorPicker, button);
+        if (!document.querySelector("#colorPicker")) {
+            optionsDiv.insertBefore(colorPicker, button);
+        }
     } else if (button.classList.contains("rainbow")) {
         mode = "rainbow";
         button.classList.add("activeMode");
         colorPicker.remove();
-    } else if (button.classList.contains("pencil")) {
-        mode = "pencil";
+    } else if (button.classList.contains("gradient")) {
+        mode = "gradient";
         button.classList.add("activeMode");
-        colorPicker.remove();
+        if (!document.querySelector("#colorPicker")) {
+        optionsDiv.insertBefore(colorPicker, modeButtons[0]);
+        }
+        opacity = 10;
     }
 }
 
-function toggleGrid(state) {
+function toggleGrid() {
     const squares = document.querySelectorAll(".gridSquare");
-    if (state === "on") {
+    if (showGrid) {
         squares.forEach(square => {
             square.style["border"] = "1px dotted rgba(0, 0, 0, 0.07)";
         });
-    } else if (state === "off") {
+    } else {
         squares.forEach(square => {
             square.style["border"] = "";
         });
@@ -161,9 +178,11 @@ modeButtons.forEach(button => {
 
 gridPicker.addEventListener("change", () => {
     if (gridPicker.checked) {
-        toggleGrid("on");
+        showGrid = true;
+        toggleGrid();
     } else {
-        toggleGrid("off");
+        showGrid = false;
+        toggleGrid();
     }
 });
 
