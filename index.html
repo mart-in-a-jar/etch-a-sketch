@@ -11,13 +11,23 @@
 </head>
 <body ondragstart="return false">
     <div class="content">
-        <div class="reset">
-            <button id="clearGrid">Reset</button>
-            <button id="newGrid">New size</button>
+        <div class="options">
+            <div class="reset">
+                <button id="clearGrid">Reset</button>
+                <button id="newGrid">New size</button>
+            </div>
+            <input type="color" id="colorPicker" value="#8a2be2">
+            <button class="mode color activeMode">Color mode</button>
+            <button class="mode rainbow">Rainbow mode</button>
+            <button class="mode pencil">Pencil mode</button>
+            <div class="gridSelect">Display gridlines<input type="checkbox" id="toggleGrid"></div>
         </div>
-        <input type="color" id="colorPicker" value="#8a2be2">
-        <button id="mode">Rainbow mode</button>
-        <h2>Hold down ctrl to erase</h2>
+        <div class="mainContent">
+            <h2>Hold down ctrl to erase</h2>
+            <div class="boardContainer">
+                <div class="drawingBoard"></div>
+            </div>
+        </div>
     </div>
     <button id="changePage">Singlecolor version</button>
 </body>

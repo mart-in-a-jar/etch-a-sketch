@@ -1,3 +1,6 @@
+:root {
+    --boardSize: 700;
+}
 html {
     box-sizing: border-box;
   }
@@ -6,25 +9,52 @@ html {
   }
 .content {
     display: flex;
-    flex-flow: column;
-}
-.gridRow {
-    display: flex;
     justify-content: center;
+    flex: 1;
+}
+.options {
+    display: flex;
+    flex-flow: column;
+    margin-right: auto;
 }
 .gridSquare {
-    border: 1px solid black;
     /* To prevent double borders (could alternatively use outline
     instead of border, and 1px margins) */
     margin-top: -1px;
     margin-right: -1px;
 }
-input {
-    width: 130px;
-}
 h2 {
     text-align: center;
 }
-#mode {
+.mode, #changePage, #colorPicker {
     width: 130px;
+}
+.activeMode {
+    background-color: rgba(16, 128, 16, 0.493);
+}
+button, #colorPicker {
+    margin: 1.5px;
+}
+.drawingBoard {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+}
+.boardContainer {
+    display: flex;
+    justify-content: center;
+    width: var(--boardSize);
+    height: var(--boardSize);
+}
+body {
+    background-color: antiquewhite;
+    display: flex;
+    flex-flow: column;
+    /* justify-content: center; */
+    min-height: 100vh;
+}
+.mainContent {
+    display: flex;
+    flex-flow: column;
+    position: absolute;
 }
